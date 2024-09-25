@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use('/uploads', express.static(__dirname+'/uploads'));
 app.use(cors({
   credentials: true,
-  origin: 'http://127.0.0.1:5173',
+  origin: 'http://localhost:5173/',
 }));
 
 async function uploadToS3(path, originalFilename, mimetype) {
@@ -226,4 +226,6 @@ app.get('/api/bookings', async (req,res) => {
   res.json( await Booking.find({user:userData.id}).populate('place') );
 });
 
-app.listen(4000);
+app.listen(4000, ()=>{
+  console.log(`Server is running on PORT`);
+});
